@@ -1,5 +1,7 @@
 package com.ramvelivela.fileManagement.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ext.SqlBlobSerializer;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,7 @@ public class Attachment {
 
     @Lob
     @Column(columnDefinition="LONGBLOB")
+    @JsonSerialize(using = SqlBlobSerializer.class)
     private byte[] data;
 
     public Attachment(String fileName, String fileType, byte[] data) {
